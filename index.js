@@ -12,9 +12,17 @@ app.get("/shopify/appInstall",(req,res)=>{
 
 app.post('/shopify/webhook/orderfulfilled', (req, res) => {
   
-  console.log('Webhook Started.....!!!!');
+  console.log('Order Fulfilled Webhook Started.....!!!!');
   var webhookBody= req.body;
-  console.log('Webhook Paylaod Received: ', webhookBody);
+  console.log('Order_Fulfilled Webhook Paylaod Received: ', webhookBody);
+  return res.status(200).send({ success: true });
+});
+
+app.post('/shopify/webhook/refundscreate', (req, res) => {
+  
+  console.log('Refunds Create Webhook Started.....!!!!');
+  var webhookBody= req.body;
+  console.log('Refunds_Create Webhook Paylaod Received: ', webhookBody);
   return res.status(200).send({ success: true });
 });
 
