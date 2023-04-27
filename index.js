@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.use(express.json());
 
 const port = process.env.PORT || 3030;
 
@@ -7,28 +8,19 @@ app.get('/', (req, res) => res.send('Welcome to Shopify Research App!'))
 
 app.get("/shopify/appInstall",(req,res)=>{
   res.send("Shopify App Installation Step1 !");
-
-  // // res.sendFile(__dirname + "/public/index.html");
-  //  let employees = [{id:1,name:"Ram"},
-  //                  {id:2,name:"RK"},
-  //                  {id:3,name:"Manish"},
-  //                  {id:4,name:"Abhijeet"},
-  //                  {id:5,name:"Varun"}];
-                   
-  // res.sendFile("/index.html");
 });
+
+app.post('/shopify/webhook/orderfulfilled', (req, res) => {
+  
+  console.log('Webhook Started.....!!!!');
+  var webhookBody= req.body;
+  console.log('Webhook Paylaod Received: ', webhookBody);
+  return res.status(200).send({ success: true });
+});
+
 
 app.get("/shopify/recieveAuthCode",(req,res)=>{
   res.send("Shopify App Receive Authcode Step2 !");
-
-  // // res.sendFile(__dirname + "/public/index.html");
-  //  let employees = [{id:1,name:"Ram"},
-  //                  {id:2,name:"RK"},
-  //                  {id:3,name:"Manish"},
-  //                  {id:4,name:"Abhijeet"},
-  //                  {id:5,name:"Varun"}];
-                   
-  // res.sendFile("/index.html");
 });
 
 app.listen(port, (err) => {
